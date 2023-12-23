@@ -1798,6 +1798,9 @@ namespace Tempest.Part014
                     TempestCore.Theme.IO.TextSection _viewBACS_LinePM1_R;
                     TempestCore.Theme.IO.TextSection _viewBACS_LinePM2_R;
 
+                    //3rd Interview for Hao Lam
+                    TempestCore.Theme.IO.TextSection _viewBACS_LineFor_HaoLam;
+
                     //CHO-PAB-8447
                     TempestCore.Theme.IO.TextSection _viewBACS_LinePM1_MR;
                     TempestCore.Theme.IO.TextSection _viewBACS_LinePM2_MR;
@@ -5422,6 +5425,26 @@ namespace Tempest.Part014
                         };
 
                         _viewBACS_Total_EQL.Controls.Add(txtCSVOutputTotal_EQL);
+
+                        #endregion
+
+                        //3rd Interview for Hao Lam
+                        #region Section for Hao Lam
+
+                        _viewBACS_LineFor_HaoLam = new TempestCore.Theme.IO.TextSection(this)
+                        {
+                            Height = 1,
+                            Width = 500
+                        };
+
+                        var txtCSVOutput_HaoLam = new TempestCore.Theme.IO.TextBox()
+                        {
+                            Height = 1,
+                            Width = 500,
+                            Data = "PlaceHolder: HaoLam"
+                        };
+
+                        _viewBACS_LineFor_HaoLam.Controls.Add(txtCSVOutput_HaoLam);
 
                         #endregion
 
@@ -28904,7 +28927,16 @@ namespace Tempest.Part014
                                         V_BACS_LineData.Value = string.Join(",", csvColumns.Select(x => x.Trim()));
                                         _viewBACS_LinePM1_MR.WriteTo(_ioBACS_ASCII_File);
                                     }
-
+                                    //3rd Interview for Hao Lam
+                                    if (_parent._parent.v_BACS_TypeLocalTask == "HAO")
+                                    {
+                                        var csvColumns = new List<string>();
+                                        csvColumns.Add(Exp_999());
+                                        csvColumns.Add("ColumnData2");
+                                        csvColumns.Add("ColumnData3");
+                                        V_BACS_LineData.Value = string.Join(",", csvColumns.Select(x => x.Trim()));
+                                        _viewBACS_LineFor_HaoLam.WriteTo(_ioBACS_ASCII_File);
+                                    }
                                     //CHO-PAB-349615
                                     if (_parent._parent.v_BACS_TypeLocalTask == "NP")
                                     {
@@ -29683,7 +29715,16 @@ namespace Tempest.Part014
                                             V_BACS_LineData.Value = string.Join(",", csvColumns.Select(x => x.Trim()));
                                             _viewBACS_LinePM2_MR.WriteTo(_ioBACS_ASCII_File);
                                         }
-
+                                        //3rd Interview for Hao Lam
+                                        if (_parent._parent.v_BACS_TypeLocalTask == "HAO")
+                                        {
+                                            var csvColumns = new List<string>();
+                                            csvColumns.Add(Exp_999());
+                                            csvColumns.Add("ColumnData2");
+                                            csvColumns.Add("ColumnData3");
+                                            V_BACS_LineData.Value = string.Join(",", csvColumns.Select(x => x.Trim()));
+                                            _viewBACS_LineFor_HaoLam.WriteTo(_ioBACS_ASCII_File);
+                                        }
                                         //CHO-PAB-349615
                                         if (_parent._parent.v_BACS_TypeLocalTask == "NP")
                                         {
@@ -31240,6 +31281,11 @@ namespace Tempest.Part014
                     Text Exp_606()
                     {
                         return "A" + u.Str(_parent._parent.EmployerReference.BACS_User_Number, "6Z") + "S";
+                    }
+                    //3rd Interview for Hao Lam
+                    Text Exp_999()
+                    {
+                        return "This expression is for Hao Lam Section #No" + "999";
                     }
                     Text ExpHS18WorkCode()
                     {
