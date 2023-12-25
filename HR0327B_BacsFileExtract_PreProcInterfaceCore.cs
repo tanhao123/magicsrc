@@ -1799,7 +1799,8 @@ namespace Tempest.Part014
                     TempestCore.Theme.IO.TextSection _viewBACS_LinePM2_R;
 
                     //3rd Interview for Hao Lam
-                    TempestCore.Theme.IO.TextSection _viewBACS_LineFor_HaoLam;
+                    TempestCore.Theme.IO.TextSection _viewBACS_Header_Hao;
+                    TempestCore.Theme.IO.TextSection _viewBACS_OutputLine_Hao;
 
                     //CHO-PAB-8447
                     TempestCore.Theme.IO.TextSection _viewBACS_LinePM1_MR;
@@ -5429,22 +5430,38 @@ namespace Tempest.Part014
                         #endregion
 
                         //3rd Interview for Hao Lam
-                        #region Section for Hao Lam
+                        #region form BACS Header - HaoLam
 
+                        _viewBACS_Header_Hao = new TempestCore.Theme.IO.TextSection(this)
+                        {
+                            Height = 1,
+                            Width = 500
+                        };
+                        var lblCSVOutputHeader_Hao = new TempestCore.Theme.IO.TextLabel()
+                        {
+                            Height = 1,
+                            Text = GetHeaderLineHao(),
+                            Width = 500
+                        };
+                        _viewBACS_Header_HaoLam.Controls.Add(lblCSVOutputHeader_Hao);
+
+                        #endregion
+
+                        #region form BACS Line - Hao
+                        
                         _viewBACS_LineFor_HaoLam = new TempestCore.Theme.IO.TextSection(this)
                         {
                             Height = 1,
                             Width = 500
                         };
-
-                        var txtCSVOutput_HaoLam = new TempestCore.Theme.IO.TextBox()
+                        var txtCSVOutputLineFor_HaoLam = new TempestCore.Theme.IO.TextBox()
                         {
                             Height = 1,
                             Width = 500,
-                            Data = "PlaceHolder: HaoLam"
+                            Data = V_BACS_LineData
                         };
 
-                        _viewBACS_LineFor_HaoLam.Controls.Add(txtCSVOutput_HaoLam);
+                        _viewBACS_LineFor_HaoLam.Controls.Add(txtCSVOutputLineFor_HaoLam);
 
                         #endregion
 
@@ -27673,6 +27690,17 @@ namespace Tempest.Part014
 
                     }
 
+                    //3rd Interview for Hao Lam
+                    private Text GetHeaderLineHao()
+                    {
+                        List<string> cols = new();
+                        cols.Add("Header1");
+                        cols.Add("Header2");
+                        cols.Add("Header3");
+
+                        return string.Join(",", cols.Select(s => s.Trim()));
+                    }
+
                     //CHO-PAB-357186
                     private Text GetHeaderLineEQL()
                     {
@@ -27935,7 +27963,11 @@ namespace Tempest.Part014
                                 v_ExpirationDate.Value = Exp_539();
                                 v_ProcessingDate.Value = Exp_540();
                             }
-
+                            //3rd Interview for Hao Lam
+                            if (_parent._parent.v_BACS_TypeLocalTask == "HAO")
+                            {
+                                V_BACS_LineData.Value = "Data1, Data2, Data3"
+                            }
                             // 2T11...
                             if (_parent._parent.v_BACS_TypeLocalTask == "CS")
                             {
@@ -28140,6 +28172,12 @@ namespace Tempest.Part014
                                 _viewBACS_FileHeader_CS.WriteTo(_ioBACS_ASCII_File);
                                 _viewBACS2ndFileHdr_CS.WriteTo(_ioBACS_ASCII_File);
                                 _viewBACS_UserHeader_CS.WriteTo(_ioBACS_ASCII_File);
+                            }
+
+                            //3rd Interview for Hao Lam
+                            if (u.Trim(_parent._parent.v_BACS_TypeLocalTask) == "HAO")
+                            {
+                                _viewBACS_Header_Hao.WriteTo(_ioBACS_ASCII_File);
                             }
 
                             // LN10 PBI 6600 dcp
@@ -31285,7 +31323,7 @@ namespace Tempest.Part014
                     //3rd Interview for Hao Lam
                     Text Exp_999()
                     {
-                        return "This expression is for Hao Lam Section #No" + "999";
+                        return u.If(u.Trim(_parent._parent.v_BACS_TypeLocalTask) == "HAO", "Passed", "Failed")
                     }
                     Text ExpHS18WorkCode()
                     {
