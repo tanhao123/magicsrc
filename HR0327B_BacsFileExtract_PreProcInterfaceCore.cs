@@ -28173,7 +28173,6 @@ namespace Tempest.Part014
                             //3rd Interview for Hao Lam
                             if (_parent._parent.v_BACS_TypeLocalTask == "HAO")
                             {
-                                V_BACS_LineData.Value = "HAO, Is, In Interview";
                                 _viewBACS_Header_Hao.WriteTo(_ioBACS_ASCII_File);
                             }
 
