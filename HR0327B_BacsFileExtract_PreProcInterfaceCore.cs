@@ -5430,7 +5430,7 @@ namespace Tempest.Part014
                         #endregion
 
                         //3rd Interview for Hao Lam
-                        #region form BACS Header - HaoLam
+                        #region form BACS Header - Hao
 
                         _viewBACS_Header_Hao = new TempestCore.Theme.IO.TextSection(this)
                         {
@@ -5443,7 +5443,7 @@ namespace Tempest.Part014
                             Text = GetHeaderLineHao(),
                             Width = 500
                         };
-                        _viewBACS_Header_HaoLam.Controls.Add(lblCSVOutputHeader_Hao);
+                        _viewBACS_Header_Hao.Controls.Add(lblCSVOutputHeader_Hao);
 
                         #endregion
 
@@ -5454,14 +5454,14 @@ namespace Tempest.Part014
                             Height = 1,
                             Width = 500
                         };
-                        var txtCSVOutputLineFor_HaoLam = new TempestCore.Theme.IO.TextBox()
+                        var txtCSVOutputLine_Hao = new TempestCore.Theme.IO.TextBox()
                         {
                             Height = 1,
                             Width = 500,
                             Data = V_BACS_LineData
                         };
 
-                        _viewBACS_OutputLine_Hao.Controls.Add(txtCSVOutputLineFor_HaoLam);
+                        _viewBACS_OutputLine_Hao.Controls.Add(txtCSVOutputLine_Hao);
 
                         #endregion
 
