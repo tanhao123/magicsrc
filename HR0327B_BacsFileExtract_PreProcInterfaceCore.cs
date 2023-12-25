@@ -27963,11 +27963,7 @@ namespace Tempest.Part014
                                 v_ExpirationDate.Value = Exp_539();
                                 v_ProcessingDate.Value = Exp_540();
                             }
-                            //3rd Interview for Hao Lam
-                            if (_parent._parent.v_BACS_TypeLocalTask == "HAO")
-                            {
-                                V_BACS_LineData.Value = "HAO, Is, In Interview"
-                            }
+
                             // 2T11...
                             if (_parent._parent.v_BACS_TypeLocalTask == "CS")
                             {
@@ -28175,8 +28171,9 @@ namespace Tempest.Part014
                             }
 
                             //3rd Interview for Hao Lam
-                            if (u.Trim(_parent._parent.v_BACS_TypeLocalTask) == "HAO")
+                            if (_parent._parent.v_BACS_TypeLocalTask == "HAO")
                             {
+                                V_BACS_LineData.Value = "HAO, Is, In Interview";
                                 _viewBACS_Header_Hao.WriteTo(_ioBACS_ASCII_File);
                             }
 
@@ -31323,7 +31320,7 @@ namespace Tempest.Part014
                     //3rd Interview for Hao Lam
                     Text Exp_999()
                     {
-                        return u.If(u.Left(u.Trim(V_BACS_LineData.Value), 3) == "HAO", "Passed", "Failed")
+                        return u.If(u.Left(u.Trim(V_BACS_LineData.Value), 3) == "HAO", "Passed", "Failed");
                     }
                     Text ExpHS18WorkCode()
                     {
