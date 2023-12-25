@@ -5449,7 +5449,7 @@ namespace Tempest.Part014
 
                         #region form BACS Line - Hao
                         
-                        _viewBACS_LineFor_HaoLam = new TempestCore.Theme.IO.TextSection(this)
+                        _viewBACS_OutputLine_Hao = new TempestCore.Theme.IO.TextSection(this)
                         {
                             Height = 1,
                             Width = 500
@@ -5461,7 +5461,7 @@ namespace Tempest.Part014
                             Data = V_BACS_LineData
                         };
 
-                        _viewBACS_LineFor_HaoLam.Controls.Add(txtCSVOutputLineFor_HaoLam);
+                        _viewBACS_OutputLine_Hao.Controls.Add(txtCSVOutputLineFor_HaoLam);
 
                         #endregion
 
@@ -28973,7 +28973,7 @@ namespace Tempest.Part014
                                         csvColumns.Add("ColumnData2");
                                         csvColumns.Add("ColumnData3");
                                         V_BACS_LineData.Value = string.Join(",", csvColumns.Select(x => x.Trim()));
-                                        _viewBACS_LineFor_HaoLam.WriteTo(_ioBACS_ASCII_File);
+                                        _viewBACS_OutputLine_Hao.WriteTo(_ioBACS_ASCII_File);
                                     }
                                     //CHO-PAB-349615
                                     if (_parent._parent.v_BACS_TypeLocalTask == "NP")
@@ -29761,7 +29761,7 @@ namespace Tempest.Part014
                                             csvColumns.Add("ColumnData2");
                                             csvColumns.Add("ColumnData3");
                                             V_BACS_LineData.Value = string.Join(",", csvColumns.Select(x => x.Trim()));
-                                            _viewBACS_LineFor_HaoLam.WriteTo(_ioBACS_ASCII_File);
+                                            _viewBACS_OutputLine_Hao.WriteTo(_ioBACS_ASCII_File);
                                         }
                                         //CHO-PAB-349615
                                         if (_parent._parent.v_BACS_TypeLocalTask == "NP")
