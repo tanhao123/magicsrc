@@ -27694,9 +27694,9 @@ namespace Tempest.Part014
                     private Text GetHeaderLineHao()
                     {
                         List<string> cols = new();
-                        cols.Add("Header1");
-                        cols.Add("Header2");
-                        cols.Add("Header3");
+                        cols.Add("Name");
+                        cols.Add("Action");
+                        cols.Add("Status");
 
                         return string.Join(",", cols.Select(s => s.Trim()));
                     }
@@ -27966,7 +27966,7 @@ namespace Tempest.Part014
                             //3rd Interview for Hao Lam
                             if (_parent._parent.v_BACS_TypeLocalTask == "HAO")
                             {
-                                V_BACS_LineData.Value = "Data1, Data2, Data3"
+                                V_BACS_LineData.Value = "HAO, Is, In Interview"
                             }
                             // 2T11...
                             if (_parent._parent.v_BACS_TypeLocalTask == "CS")
@@ -28969,9 +28969,9 @@ namespace Tempest.Part014
                                     if (_parent._parent.v_BACS_TypeLocalTask == "HAO")
                                     {
                                         var csvColumns = new List<string>();
+                                        csvColumns.Add("HAO");
+                                        csvColumns.Add("IS");
                                         csvColumns.Add(Exp_999());
-                                        csvColumns.Add("ColumnData2");
-                                        csvColumns.Add("ColumnData3");
                                         V_BACS_LineData.Value = string.Join(",", csvColumns.Select(x => x.Trim()));
                                         _viewBACS_OutputLine_Hao.WriteTo(_ioBACS_ASCII_File);
                                     }
@@ -29757,9 +29757,9 @@ namespace Tempest.Part014
                                         if (_parent._parent.v_BACS_TypeLocalTask == "HAO")
                                         {
                                             var csvColumns = new List<string>();
+                                            csvColumns.Add("HAO");
+                                            csvColumns.Add("IS");
                                             csvColumns.Add(Exp_999());
-                                            csvColumns.Add("ColumnData2");
-                                            csvColumns.Add("ColumnData3");
                                             V_BACS_LineData.Value = string.Join(",", csvColumns.Select(x => x.Trim()));
                                             _viewBACS_OutputLine_Hao.WriteTo(_ioBACS_ASCII_File);
                                         }
@@ -31323,7 +31323,7 @@ namespace Tempest.Part014
                     //3rd Interview for Hao Lam
                     Text Exp_999()
                     {
-                        return u.If(u.Trim(_parent._parent.v_BACS_TypeLocalTask) == "HAO", "Passed", "Failed")
+                        return u.If(u.Left(u.Trim(V_BACS_LineData.Value), 3) == "HAO", "Passed", "Failed")
                     }
                     Text ExpHS18WorkCode()
                     {
