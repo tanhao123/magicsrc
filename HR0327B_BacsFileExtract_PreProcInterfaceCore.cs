@@ -5437,13 +5437,13 @@ namespace Tempest.Part014
                             Height = 1,
                             Width = 500
                         };
-                        var lblCSVOutputHeader_Hao = new TempestCore.Theme.IO.TextLabel()
+                        var txtCSVOutputHeader_Hao = new TempestCore.Theme.IO.TextBox()
                         {
                             Height = 1,
-                            Text = GetHeaderLineHao(),
-                            Width = 500
+                            Width = 500,
+                            Data = new TextColumn() { Value = GetHeaderLineHao() }
                         };
-                        _viewBACS_Header_Hao.Controls.Add(lblCSVOutputHeader_Hao);
+                        _viewBACS_Header_Hao.Controls.Add(txtCSVOutputHeader_Hao);
 
                         #endregion
 
